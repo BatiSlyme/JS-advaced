@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <h2 id="parent" style="padding: 40px; background-color: aqua;">Parent
+            <div>
+                <h3 id="child" style="padding: 40px; background-color: coral;">Child</h3>
+            </div>
+        </h2>
+
+    </div>
+
+    <ul id="movie-list">
+        <li>The Matrix</li>
+        <li>The room</li>
+        <li>Lord of the rings</li>
+        <li>Man of steel</li>
+        <li>The Conjuring</li>
+    </ul>
+
+    <a href="" id="link">Link</a>
+    <script>
+        //propagation
+        let parentElement = document.getElementById('parent');
+        let childElement = document.getElementById('child');
+
+        parentElement.addEventListener('click', (e) => {
+            e.stopPropagation();// след него никой не се активира
+
+            console.log('parent clicked');
+        }, true /*capture true-> parent first*/);
+        childElement.addEventListener('click', (e) => {
+            console.log('child clicked');
+        });
+
+        //delegation
+        let movieElements = document.getElementById('movie-list');
+        movieElements.addEventListener('click', (e) => {
+            
+            console.log(e.target);
+            console.log(e.currentTarget);//the whole element
+            console.log(e.target.tagName);
+
+            if (e.target.tagName == 'LI') {
+                e.target.style.textDecoration = 'line-through';
+            }
+
+        });
+
+        //2nd example
+        let linkElement = document.getElementById('link');
+        linkElement.addEventListener('click', (e) => {
+            e.preventDefault();//prevents default function on element 
+            console.log('click link');
+        })
+    </script>
+</body>
+
+</html>

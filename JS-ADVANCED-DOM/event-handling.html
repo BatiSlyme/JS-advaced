@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    li {
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <h1>Event Handling</h1>
+
+
+
+    <ul id="movie-list">
+        <li>The Matrix</li>
+        <li>The room</li>
+        <li>Lord of the rings</li>
+        <li>Man of steel</li>
+        <li>The Conjuring</li>
+    </ul>
+
+    <div id="number">0</div>
+    <button onclick="clearCounter()">clear</button>
+    <button id="increment">+</button>
+    <button id="decrement">-</button>
+
+    <div>
+        <input type="text" id="some-text">
+        <button id="some-button" disabled>send</button>
+        <input type="text" id="result">
+    </div>
+
+    <script>
+
+
+        let liItems = document.querySelectorAll('ul li');
+        liItems.forEach(x => {
+            x.onclick = () => {
+                console.log('clicked');
+            }
+        });
+
+        console.log(liItems.parentNode);
+
+        //attach event handler by attribute
+        function clearCounter() {
+            numberElement.textContent = 0;
+        }
+
+        //attack event handler by event property
+        let numberElement = document.getElementById('number');
+
+        let incrementElement = document.getElementById('increment');
+
+        incrementElement.onclick = (e) => {
+            let currentNumber = Number(numberElement.textContent);
+            numberElement.textContent = currentNumber + 1;
+        }
+
+        let decrementElement = document.getElementById('decrement');
+
+        decrementElement.addEventListener('click', function (e) {
+            let currentNumber = Number(numberElement.textContent);
+            numberElement.textContent = currentNumber - 1;
+        });
+
+        liItems.forEach(el => {
+            el.addEventListener('click', (e) => {
+                console.log(e.currentTarget.textContent);
+                e.currentTarget.style.textDecoration = 'line-through';
+            });
+        })
+
+        let textElement = document.getElementById('some-text');
+        let btnElement = document.getElementById('some-button');
+
+        textElement.addEventListener('input', (e) => {
+            console.log('typing');
+            if (e.currentTarget.value.length > 0) {
+                btnElement.removeAttribute('disabled');
+
+            } else {
+                btnElement.setAttribute('disabled', true);
+
+            }
+        })
+
+        let resultElement = document.getElementById('result');
+        //remove add many EventListeners
+        btnElement.addEventListener('click', () => {
+            resultElement.value = textElement.value;
+        });
+        //we can add a remove event listener too
+
+    </script>
+
+</body>
+
+</html>

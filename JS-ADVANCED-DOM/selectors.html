@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<h1 id="heading">DOM Selectors</h1>
+
+<body>
+    <p class="fancy-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis, quas?</p>
+
+
+
+    <ul>
+        <li class="fancy-text">Some phrase here</li>
+        <li>Second phrase</li>
+    </ul>
+
+    <ol>
+        <li>Other list item</li>
+    </ol>
+
+    <ul id="items">
+        <li>first item</li>
+        <li>second item</li>
+        <li>third item</li>
+    </ul>
+
+
+    <textarea id="result"></textarea>
+    <button onclick="extractText()">extract Text</button>
+
+    <br> <br>
+    <input type="text" id="num1" /> +
+    <input type="text" id="num2" /> =
+    <input type="text" id="sum" />
+    <input type="button" value="Cacl" onclick="calc()" />
+
+    <br>
+    Weclome to the show more example
+    <a href="#" id="more" onclick="showMore()">Read More ...</a>
+    <span id="text" style="display: none;">Welcome to JS and DOM</span>
+    <br>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Town</th>
+        </tr>
+        <tr>
+            <td>Eve</td>
+            <td>Soofia</td>
+        </tr>
+        <tr>
+            <td>Nick</td>
+            <td>Varna</td>
+        </tr>
+        <tr>
+            <td>Didi</td>
+            <td>Ruse</td>
+        </tr>
+        <tr>
+            <td>Tedy</td>
+            <td>Varna</td>
+        </tr>
+    </table>
+    <button onclick="colorize()">Colorize</button>
+
+    <br>
+    <table id="sumTable">
+        <tr>
+            <th>Product</th>
+            <th>Cost</th>
+        </tr>
+        <tr>
+            <td>Beer</td>
+            <td>2.88</td>
+        </tr>
+        <tr>
+            <td>Fries</td>
+            <td>2.15</td>
+        </tr>
+        <tr>
+            <td>Burger</td>
+            <td>4.59</td>
+        </tr>
+        <tr>
+            <td>Total:</td>
+            <td id="sum"></td>
+        </tr>
+    </table>
+
+    <button onclick="sumTable()">Sum Table</button>
+
+
+    <p id="content">
+        The Rose Valley (Bulgaria) is located just south of the Balkan Mountains (Kazanlak).The most common oil-bearing
+        rose found in the valley is the pink-petaled Damask rose (Rosa damascena Mill).
+    </p>
+    <button onclick="extract('content')">Extract</button>
+
+    <script>
+        //get by id 
+        let headingElement = document.getElementById('heading');
+        console.log(headingElement);
+
+        // get by ClassName
+        let textElements = document.getElementsByClassName('fancy-text');
+        console.log(textElements);
+        console.log(textElements[0]);
+        console.log(textElements[1]);
+
+        //get by Tag Name
+        let liElements = document.getElementsByTagName('li');
+        console.log(liElements);
+
+        //get by css selector
+        let fancyParagrpth = document.querySelector('p.fancy-text');
+        console.log(fancyParagrpth);
+
+        //get many by css selector
+        let unorderedLiElements = document.querySelectorAll('ul li');
+        console.log(unorderedLiElements);
+
+        function extractText() {
+            let ulElement = document.getElementById('items');
+            console.log(ulElement.textContent);
+            let textAreaElement = document.getElementById('result');
+            textAreaElement.textContent = ulElement.textContent;
+
+        }
+
+        function calc() {
+            let input1 = document.getElementById('num1');
+            let input2 = document.getElementById('num2');
+            let sum = document.getElementById('sum');
+            sum.value = Number(input1.value) + Number(input2.value);
+        }
+
+        function showMore() {
+            let showText = document.getElementById('text');
+            showText.style.display = 'inline';
+
+            let hideText = document.getElementById('more');
+            hideText.style.display = 'none';
+        }
+
+        function colorize() {
+            // let rowElements = document.querySelectorAll('tr:nth-of-type(2n) td');//every 2nd tr td
+            // // console.log(rowElements);
+            // // rowElements.style.backgroundColor = 'teal';
+            // rowElements.forEach(x => {
+            //     x.style.backgroundColor = 'teal';
+            // });
+
+            //2nd way
+            rowElements = document.getElementsByTagName('tr');
+            let rows = Array.from(rowElements);
+            // console.log(rowElementsArr);
+
+            rows.forEach((x, i) => {
+                if (i % 2 != 0) {
+                    x.style.backgroundColor = 'teal';
+
+                }
+            });
+
+        }
+        function sumTable() {
+            // let costElements = document.querySelectorAll('#sumTable tr td:nth-of-type(2n)');//every 2nd td
+            let costElements = document.querySelectorAll('#sumTable tr td')
+            console.log(costElements);
+
+            let sum = Array.from(costElements).reduce((a, x) => {
+                console.log('x.textContent' + x.textContent);
+                let cost = Number(x.textContent) || 0;
+                console.log('cost is ' + cost);
+                return a + cost;
+            }, 0);
+            console.log(sum);
+
+            let resultElement = document.querySelector('table#sumTable tr td#sum');
+            console.log(resultElement);
+            resultElement.textContent = sum;
+        }
+        function extract(content) {
+            let contentElement = document.getElementById('content');
+            let pattern = /\(([^(]+\)/q;
+            let matches = contentElement.textContent.matchAll(pattern);
+            console.log(contentElement.textContent);
+        }
+
+
+
+    </script>
+
+
+</body>
+
+</html>
