@@ -20,5 +20,5 @@ function cards(face, suit) {
     return card;
 }
 
-let card = cards('a', 'S');
+let card = cards('K', 'A');
 card.toString();

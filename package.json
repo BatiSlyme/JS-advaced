@@ -1,0 +1,24 @@
+{
+  "name": "js-advaced",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BatiSlyme/JS-advaced.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BatiSlyme/JS-advaced/issues"
+  },
+  "homepage": "https://github.com/BatiSlyme/JS-advaced#readme",
+  "dependencies": {
+    "chai": "^4.3.10",
+    "mocha": "^10.2.0"
+  }
+}

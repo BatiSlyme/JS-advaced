@@ -10,10 +10,11 @@ function solve(numbers, startIndex, endIndex) {
     let subNumbers = numbers.slice(startIndex, endIndex);
     let sum = subNumbers.reduce((a, x) => a + Number(x), 0);
     console.log(sum);
+    return sum;
 }
 
 solve([10, 20, 30, 40, 50, 60], 1, 3);
-
+module.exports = solve;
 
 function getNumber(x) {
     let randomNumber = Math.random();
